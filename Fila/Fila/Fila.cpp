@@ -84,17 +84,80 @@ void insere()
 		return;
 	}
 
-	cout << "Digite o elemento: ";
+	
+	NO* novo = (NO*)malloc(sizeof(NO));
+	if (novo == NULL) {
+		cout << "Erro: Falha ao alocar memoria.\n";
+		return;
+	}
+
+	
+	cout << "Digite o valor do elemento: ";
 	cin >> novo->valor;
 	novo->prox = NULL;
 
+	
+	if (inicio == NULL) {
+		
+		inicio = novo;
+		fim = novo;
+	}
+	else {
+		
+		fim->prox = novo;
+		fim = novo;
+	}
 
+	cout << "Elemento " << novo->valor << " inserido na fila.\n";
 }
+
+
+
 
 void remove()
 {
+	
+	if (inicio == NULL) {
+		cout << "Erro: Fila vazia. Nao ha elementos para remover.\n";
+		return;
+	}
 
+	
+	NO* paraRemover = inicio;
 
+	
+	inicio = inicio->prox;
 
+	
+	cout << "Elemento " << paraRemover->valor << " removido da fila.\n";
+
+	
+	free(paraRemover);
+
+	
+	if (inicio == NULL) {
+		fim = NULL;
+	}
 }
+
+void mostrarFila()
+{
+	
+	if (inicio == NULL) {
+		cout << "Fila vazia.\n";
+		return;
+	}
+
+	
+	NO* aux = inicio;
+	cout << "Elementos na fila: ";
+	while (aux != NULL) {
+		cout << aux->valor << " ";
+		aux = aux->prox;            
+	}
+	cout << endl;
+}
+
+
+
 
